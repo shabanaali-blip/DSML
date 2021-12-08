@@ -1,0 +1,17 @@
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+import numpy as np
+import matplotlib.pyplot as plt
+irisData = load_iris()# Loading data
+X = irisData.data
+y = irisData.target
+ # Create feature and target arrays
+X_train, X_test, y_train, y_test = train_test_split(
+             X, y, test_size = 0.2, random_state=42)
+# Split into training and test set
+knn = KNeighborsClassifier(n_neighbors=7)
+ 
+knn.fit(X_train, y_train)
+print(knn.score(X_test, y_test))
+# Calculate the accuracy of the model
