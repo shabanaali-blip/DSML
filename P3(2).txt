@@ -1,0 +1,13 @@
+import pandas
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
+df = pandas.read_csv("startups.csv")
+X = df[['R&D Spend', 'Administration']]
+y = df['Profit']
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2, random_state=0)
+regr = linear_model.LinearRegression()
+regr.fit(X, y)
+y_pred= regr.predict(X_test)
+print('R2 score is:', metrics.r2_score(y_test,y_pred))
+profit= regr.predict([[165349.2,136897.8]])
+print('Profit for R&D Spend=165349.2 and Administration=136897.8',profit)
