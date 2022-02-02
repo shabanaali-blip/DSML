@@ -1,0 +1,47 @@
+import numpy as np
+import pandas as pd
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import load_iris
+from sklearn import tree
+
+a=load_iris()
+x=a.data
+y=a.target
+
+x_train,x_test,y_train,y_test=(train_test_split(x,y,test_size=1/3,random_state=0))
+from sklearn.tree import DecisionTreeClassifier
+clfr=DecisionTreeClassifier()
+clfr.fit(x_train,y_train)
+
+train=clfr.predict(x_train)
+test=clfr.predict(x_test)
+print("Train Accuracy:",accuracy_score(y_true=y_train,y_pred=train))
+print("Test Accuracy:",accuracy_score(y_true=y_test,y_pred=test))
+
+tree.plot_tree(clfr)
+
+import numpy as np
+import pandas as pd
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+
+datasets = pd.read_csv('Salary_Data.csv')
+x=a.data
+y=a.target
+
+x_train,x_test,y_train,y_test=(train_test_split(x,y,test_size=1/3,random_state=0))
+from sklearn.tree import DecisionTreeClassifier
+clfr=DecisionTreeClassifier()
+clfr.fit(x_train,y_train)
+
+train=clfr.predict(x_train)
+test=clfr.predict(x_test)
+print("Train Accuracy:",accuracy_score(y_true=y_train,y_pred=train))
+print("Test Accuracy:",accuracy_score(y_true=y_test,y_pred=test))
+
+tree.plot_tree(clfr)
+
