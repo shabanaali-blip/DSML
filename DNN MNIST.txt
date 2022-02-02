@@ -1,0 +1,29 @@
+import tensorflow as tf
+from tensorflow import keras
+import matplotlib.pyplot as plt
+mnistdb=keras.datasets.mnist
+(x_train,y_train),(x_test,y_test)=mnistdb.load_data()
+x_train=x_train.reshape((60000,28*28))
+x_test=x_test.reshape((10000,28*28))
+x_train=x_train.astype('float32')/255
+x_test=x_test.astype('float32')/255
+ml=keras.models.Sequential()
+ml.add(keras.layers.Dense(units=50,activation='relu',input_shape=x_train.shape[1:]))
+ml.add(keras.layers.Dense(units=100,activation='relu'))  
+ml.add(keras.layers.Dense(units=70,activation='relu'))
+ml.add(keras.layers.Dense(units=10,activation='softmax'))
+ml.summary()
+ml.compile(loss='sparse_categorical_crossentropy',optimizer='adam',metrics=['accuracy'])     
+ml.fit(x_train,y_train,epochs=1,batch_size=16)
+test_loss,test_accuracy=ml.evaluate(x_test,y_test)
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.models import load_model
+img=load_img("/content/number-7-illustration_csp5885792.jpg",grayscale=True,target_size=(28,28))
+plt.imshow(img)
+img=img_to_array(img)
+img=img.reshape(1,28*28)
+img=img.astype('float32')/255.0
+digit=ml.predict(img)
+print('digit is',digit[0])
+                                                                               
